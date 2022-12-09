@@ -27,8 +27,8 @@ classes = {
 
 
 class DBStorage:
-    __engine: None
-    __session: None
+    __engine = None
+    __session = None
 
     def __init__(self):
         self.__engine = create_engine(
@@ -69,9 +69,10 @@ class DBStorage:
 
     def reload(self):
         Base.metadata.create_all(self.__engine)
-        sess = sessionmaker(expire_on_commit=False, bind=self.__engine)
-        Session = scoped_session(sess)
-        self.__session = Session()
+        Session = sessionmaker(expire_on_commit=False, bind=self.__engine)
+        Scoped = scoped_session(Session)
+        self.__session = Scoped
 
     def close(self):
+        """remove method on private session attribute"""
         self.__session.remove()
