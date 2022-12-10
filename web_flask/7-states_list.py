@@ -13,7 +13,7 @@ def states_list():
     result = []
     for state in state_dict.values():
         result.append(state)
-    return render_template('7-states_list.html', state_list=state_dict)
+    return render_template('7-states_list.html', state_list=result)
 
 
 @app.teardown_appcontext
