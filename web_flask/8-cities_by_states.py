@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 """Flask"""
 from flask import Flask, render_template
+from models.state import State
 from models import storage
 app = Flask(__name__)
 
@@ -8,13 +9,11 @@ app = Flask(__name__)
 @app.route('/states_list', strict_slashes=False)
 def states_list():
     """states_list"""
-    res = []
-    storage.reload()
-
-    for v in storage.all("State").values():
-        res.append([v.id, v.name])
-
-    return render_template("7-states_list.html", states=res)
+    state_dict = storage.all(State)
+    result = []
+    for state in state_dict.values():
+        result.append(state)
+    return render_template('7-states_list.html', state_list=result)
 
 
 @app.route('/cities_by_states', strict_slashes=False)
