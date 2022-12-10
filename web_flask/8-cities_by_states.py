@@ -9,8 +9,8 @@ app = Flask(__name__)
 @app.route('/cities_by_states', strict_slashes=False)
 def states_list():
     """states_list"""
-    state_dict = storage.all(State).values()
-    return render_template('8-cities_by_states', state_list=state_dict)
+    city_dict = storage.all(State).values()
+    return render_template('8-cities_by_states', city_list=city_dict)
 
 
 @app.teardown_appcontext
