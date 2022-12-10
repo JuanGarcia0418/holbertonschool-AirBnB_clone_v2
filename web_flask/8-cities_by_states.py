@@ -9,12 +9,12 @@ app = Flask(__name__)
 @app.route('/cities_by_states', strict_slashes=False)
 def states_list():
     """states_list"""
-    state_dict = storage.all(State)
+    state_dict = storage.all(State).values()
     return render_template('8-cities_by_states', state_list=state_dict)
 
 
 @app.teardown_appcontext
-def teardown_db(exception):
+def teardown_db(self):
     """teardown"""
     storage.close()
 
